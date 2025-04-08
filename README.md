@@ -32,13 +32,4 @@ package.json # Dépendances
 | PUT     | `/tasks/:id` | Modifier une tâche     |  
 | DELETE  | `/tasks/:id` | Supprimer une tâche    |  
 
-## 💡 Objectifs du test
-- **Améliorations front-end** :  
-  - Ajouter des interactions utilisateur fluides 
-  - Rendre le design responsive/moderniser le CSS
-- **Nouvelles fonctionnalités** :  
-  - Filtrage des tâches (terminées/en cours)  
-  - Validation des champs de saisie  
-  - Ajouter des animations CSS  
-
-*Documentez vos choix techniques dans un fichier NOTES.md*  
+*Documentez vos choix techniques dans le fichier NOTES.md*  
