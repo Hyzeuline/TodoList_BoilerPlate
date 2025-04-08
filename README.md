@@ -5,7 +5,7 @@
 1. Cloner le dépôt :  
 `git clone https://github.com/Meta-sense/TodoList_BoilerPlate.git`
 
-2. Se placer dans le dossier :
+2. Se placer dans le dossier :  
 `cd TodoList_BoilerPlate`
 
 3. Installer les dépendances :  
