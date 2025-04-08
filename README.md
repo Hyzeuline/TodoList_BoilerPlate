@@ -5,20 +5,20 @@
 1. Cloner le dépôt :  
 
 2. Installer les dépendances :  
-npm install
+`npm install`
 
 3. Démarrer le serveur :  
-npm start
+`npm start`
 
 4. Ouvrir `public/index.html` dans un navigateur.  
 
 ## 🛠️ Structure du projet  
-public/
+`public/
 ├── index.html # Interface utilisateur
 ├── styles.css # Styles CSS
 └── script.js # Logique front-end
 server.js # API Node.js/Express
-package.json # Dépendances
+package.json # Dépendances`
 
 ## 🔗 API Endpoints  
 | Méthode | URL          | Action                 |  
