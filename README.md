@@ -17,12 +17,12 @@
 5. Ouvrir `public/index.html` dans un navigateur.  
 
 ## 🛠️ Structure du projet  
-public/<br>
-├── index.html # Interface utilisateur<br>
-├── styles.css # Styles CSS<br>
-└── script.js # Logique front-end<br>
-server.js # API Node.js/Express<br>
-package.json # Dépendances<br>
+public/  
+├── index.html # Interface utilisateur  
+├── styles.css # Styles CSS  
+└── script.js # Logique front-end  
+server.js # API Node.js/Express  
+package.json # Dépendances  
 
 ## 🔗 API Endpoints  
 | Méthode | URL          | Action                 |  
