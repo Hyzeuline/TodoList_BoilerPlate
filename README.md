@@ -3,6 +3,7 @@
 
 ## 🚀 Installation  
 1. Cloner le dépôt :  
+`https://github.com/Meta-sense/TodoList_BoilerPlate.git`
 
 2. Installer les dépendances :  
 `npm install`
@@ -13,12 +14,12 @@
 4. Ouvrir `public/index.html` dans un navigateur.  
 
 ## 🛠️ Structure du projet  
-`public/
-├── index.html # Interface utilisateur
-├── styles.css # Styles CSS
-└── script.js # Logique front-end
-server.js # API Node.js/Express
-package.json # Dépendances`
+public/<br>
+├── index.html # Interface utilisateur<br>
+├── styles.css # Styles CSS<br>
+└── script.js # Logique front-end<br>
+server.js # API Node.js/Express<br>
+package.json # Dépendances<br>
 
 ## 🔗 API Endpoints  
 | Méthode | URL          | Action                 |  
