@@ -3,7 +3,7 @@
 
 ## 🚀 Installation  
 1. Cloner le dépôt :  
-`https://github.com/Meta-sense/TodoList_BoilerPlate.git`
+`git clone https://github.com/Meta-sense/TodoList_BoilerPlate.git`
 
 2. Installer les dépendances :  
 `npm install`
