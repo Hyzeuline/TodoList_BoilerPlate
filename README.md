@@ -5,13 +5,16 @@
 1. Cloner le dépôt :  
 `git clone https://github.com/Meta-sense/TodoList_BoilerPlate.git`
 
-2. Installer les dépendances :  
+2. Se placer dans le dossier :
+`cd TodoList_BoilerPlate`
+
+3. Installer les dépendances :  
 `npm install`
 
-3. Démarrer le serveur :  
+4. Démarrer le serveur :  
 `npm start`
 
-4. Ouvrir `public/index.html` dans un navigateur.  
+5. Ouvrir `public/index.html` dans un navigateur.  
 
 ## 🛠️ Structure du projet  
 public/<br>
