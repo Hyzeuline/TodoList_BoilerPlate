@@ -8,6 +8,7 @@ function createTaskElement(task) {
 
   const statusSpan = document.createElement("span");
   statusSpan.textContent = task.completed ? "✓" : "✗";
+  statusSpan.style.color = task.completed ? "green" : "red";
   statusSpan.style.marginRight = "10px";
   li.appendChild(statusSpan);
 
@@ -69,6 +70,7 @@ function createTaskElement(task) {
     if (res.ok) {
       task.completed = newStatus;
       statusSpan.textContent = task.completed ? "✓" : "✗";
+      statusSpan.style.color = task.completed ? "green" : "red";
     } else {
       alert("Erreur lors de la mise à jour de l'état.");
     }
@@ -127,10 +129,16 @@ const fetchTasks = async () => {
 fetchTasks();
 
 // Fonction de filtrage des tâches
-const filterTasks = (status) => {
+const filterTasks = (status, button) => {
+  const allButton = document.querySelectorAll(".filterButton");
+  for (const filterButton of allButton) {
+    filterButton.classList.remove("selected");
+  }
+  button.classList.add("selected");
+
   const allTasks = document.querySelectorAll("#taskList li");
 
-  allTasks.forEach((taskElement) => {
+  for (const taskElement of allTasks) {
     const taskStatus = taskElement.querySelector("span").textContent;
 
     if (
@@ -142,19 +150,21 @@ const filterTasks = (status) => {
     } else {
       taskElement.style.display = "none";
     }
-  });
+  }
 };
 
 // Ajoute les boutons de filtrage
 document
   .getElementById("filterAll")
-  .addEventListener("click", () => filterTasks("all"));
+  .addEventListener("click", (event) => filterTasks("all", event.target));
 document
   .getElementById("filterCompleted")
-  .addEventListener("click", () => filterTasks("completed"));
+  .addEventListener("click", (event) => filterTasks("completed", event.target));
 document
   .getElementById("filterIncomplete")
-  .addEventListener("click", () => filterTasks("incomplete"));
+  .addEventListener("click", (event) =>
+    filterTasks("incomplete", event.target)
+  );
 
 // Dark Mode
 const toggleBtn = document.getElementById("darkToggle");

@@ -12,24 +12,26 @@ app.use(express.static("public"));
 // Routes API
 app.get("/tasks", (req, res) => res.json(tasks));
 app.post("/tasks", (req, res) => {
-  const task = { id: Date.now(), ...req.body };
-  tasks.push(task);
-  res.status(201).json(task);
   if (!req.body.name || !req.body.name.trim()) {
     return res.status(400).json({ error: "Le nom de la tâche est requis." });
   }
+  const task = {
+    id: Date.now(),
+    name: req.body.name,
+    completed: req.body.completed,
+  };
+  tasks.push(task);
+  res.status(201).json(task);
 });
 // Supprimer une tâche par ID
 app.delete("/tasks/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const index = tasks.findIndex((task) => task.id === id);
-
-  if (index !== -1) {
-    tasks.splice(index, 1);
-    res.sendStatus(204); // No Content
-  } else {
-    res.status(404).json({ error: "Tâche non trouvée" });
+  if (index === -1) {
+    return res.status(404).json({ error: "Tâche non trouvée" });
   }
+  tasks.splice(index, 1);
+  res.sendStatus(204); // No Content
 });
 
 // Mettre à jour une tâche (ex: marquer comme terminée)

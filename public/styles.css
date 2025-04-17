@@ -5,8 +5,15 @@ body {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: rgb(246, 229, 208);
   color: black;
+  background-color: rgb(246, 229, 208);
+  background-image: linear-gradient(to right, #ccc 1px, transparent 1px),
+    linear-gradient(to bottom, #ccc 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.selected.filterButton {
+  background-color: aquamarine;
 }
 
 #taskSort {
