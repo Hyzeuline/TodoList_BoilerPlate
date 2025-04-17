@@ -1,26 +1,58 @@
 body {
-    font-family: Arial, sans-serif;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  #taskInput {
-    padding: 8px;
-    width: 70%;
-  }
-  
-  #addTaskBtn {
-    padding: 8px 15px;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  li {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-  }
-  
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  color: black;
+}
+
+#taskInput {
+  padding: 8px;
+  width: 70%;
+}
+
+#addTaskBtn {
+  padding: 8px 15px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  margin: 8px;
+}
+
+button {
+  margin: 5px;
+}
+
+/* Dark Mode */
+body.dark {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+body.dark button {
+  background-color: #333;
+  color: white;
+}
+
+body.dark input {
+  background-color: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
+.edit-input {
+  font-size: 1em;
+  padding: 4px;
+  width: 80%;
+}
+.task-name {
+  cursor: pointer;
+}
