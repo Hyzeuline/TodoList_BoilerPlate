@@ -1,20 +1,18 @@
-Fonctionnalités obligatoires :
+Jour 1 : 2h
 
-Jour 1 : 1h45
-compréhension du sujet et découverte du concept lien entre route API côté serveur et requête côté client
-
-- Ajout des tâches côté client et côté serveur
-
-Jour 2 : 2h30 (1h45)
-
+- Ajout des fonctionnalités obligatoires
 - Création de route API DELETE et PUT
-- Fonctionnalité dark mode
+
+Jour 2 : 2h
+Ajout des fonctionnalités facultatives
+
 - Tri des tâches
 - Editions des tâches
 - Sauvegarde locale "localStorage"
 - Ajout id à chaque task pour pouvoir les modifier/ supprimer/ faire changer de statut/ les trier
 
-Jour 3 :
+Jour 3 : 1h
 
-- Ajout de fonctionnalités facultatives :
-- Ajout CSS
+- CSS
+- responsive à faire
+- css button

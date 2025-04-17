@@ -1,19 +1,37 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 @import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap");
 body {
+  --text-color: black;
+  --bg-color: rgb(246, 229, 208);
+  --grid-color: rgb(214, 193, 167);
+  --bg-2-color: white;
+  --bg-selected-color: aquamarine;
+
   font-family: "Patrick Hand", cursive;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  color: black;
-  background-color: rgb(246, 229, 208);
-  background-image: linear-gradient(to right, #ccc 1px, transparent 1px),
-    linear-gradient(to bottom, #ccc 1px, transparent 1px);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  background-image: linear-gradient(
+      to right,
+      var(--grid-color) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
+body.dark {
+  --text-color: white;
+  --bg-color: #121212;
+  --bg-2-color: rgb(71, 70, 61);
+  --grid-color: rgb(55, 52, 49);
+  --bg-selected-color: rgb(33, 244, 65);
+}
+
 .selected.filterButton {
-  background-color: aquamarine;
+  background-color: var(--bg-selected-color);
 }
 
 #taskSort {
@@ -23,6 +41,9 @@ body {
   font-family: "Patrick Hand", cursive;
   padding: 8px;
   width: 70%;
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+  background-color: var(--bg-2-color);
 }
 
 #addTaskBtn {
@@ -36,30 +57,13 @@ ul {
 
 li {
   padding: 8px;
-  border-bottom: 1px solid #ddd;
+  background-color: var(--bg-2-color);
   margin: 8px;
 }
 
 button {
   font-family: "Patrick Hand", cursive;
   margin: 5px;
-}
-
-/* Dark Mode */
-body.dark {
-  background-color: #121212;
-  color: #f1f1f1;
-}
-
-body.dark button {
-  background-color: #333;
-  color: white;
-}
-
-body.dark input {
-  background-color: #333;
-  color: white;
-  border: 1px solid #555;
 }
 
 .edit-input {
