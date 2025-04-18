@@ -5,6 +5,7 @@ const taskList = document.querySelector("#taskList");
 function createTaskElement(task) {
   const li = document.createElement("li");
   li.setAttribute("data-id", task.id);
+  li.setAttribute("draggable", "true"); // Rendre l'élément draggable
 
   const statusSpan = document.createElement("span");
   statusSpan.textContent = task.completed ? "✓" : "✗";
@@ -19,14 +20,15 @@ function createTaskElement(task) {
 
   // Double-clic pour édition
   nameSpan.addEventListener("dblclick", () => {
-    const input = document.createElement("input");
+    const input = document.createElement("input"); // Création d'un champ de saisie pour éditer le nom de la tâche
     input.type = "text";
     input.value = task.name;
     input.classList.add("edit-input");
 
-    li.replaceChild(input, nameSpan);
+    li.replaceChild(input, nameSpan); // Remplacement du nom de la tâche par le champ de saisie
     input.focus();
 
+    // Fonction pour sauvegarder la modification du nom de la tâche
     const save = async () => {
       const newName = input.value.trim();
       if (newName && newName !== task.name) {
@@ -35,7 +37,7 @@ function createTaskElement(task) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             name: newName,
-            completed: task.completed, // 🛠 on garde le statut actuel
+            completed: task.completed,
           }),
         });
 
@@ -49,6 +51,7 @@ function createTaskElement(task) {
       li.replaceChild(nameSpan, input);
     };
 
+    // Sauvegarde si la touche "Entrée" est pressée, ou annulation avec "Échap"
     input.addEventListener("blur", save);
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter") input.blur();
@@ -56,10 +59,12 @@ function createTaskElement(task) {
     });
   });
 
+  // Création du bouton "Terminer"
   const completeBtn = document.createElement("button");
   completeBtn.textContent = " Terminer";
   completeBtn.style.marginLeft = "10px";
 
+  // Ajout d'un événement de clic pour marquer la tâche comme terminée
   completeBtn.addEventListener("click", async () => {
     const newStatus = !task.completed;
     const res = await fetch(`/tasks/${task.id}`, {
@@ -76,10 +81,12 @@ function createTaskElement(task) {
     }
   });
 
+  // Création du bouton "Supprimer"
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = " Supprimer";
   deleteBtn.style.marginLeft = "10px";
 
+  // Ajout d'un événement de clic pour supprimer la tâche
   deleteBtn.addEventListener("click", async () => {
     const res = await fetch(`/tasks/${task.id}`, { method: "DELETE" });
     if (res.ok) {
@@ -89,12 +96,66 @@ function createTaskElement(task) {
     }
   });
 
+  // Alignement des boutons à droite
+  completeBtn.style.float = "right";
+  deleteBtn.style.float = "right";
+
   li.appendChild(completeBtn);
   li.appendChild(deleteBtn);
+
+  // Ajouter des événements de Drag & Drop
+  li.addEventListener("dragstart", (e) => {
+    e.dataTransfer.setData("text/plain", task.id);
+    setTimeout(() => {
+      li.style.opacity = "0.5";
+    }, 0);
+  });
+
+  li.addEventListener("dragend", () => {
+    li.style.opacity = "1";
+  });
+
+  taskList.addEventListener("dragover", (e) => {
+    e.preventDefault(); // Permet le drop
+  });
+
+  taskList.addEventListener("drop", (e) => {
+    e.preventDefault();
+    const draggedTaskId = e.dataTransfer.getData("text/plain");
+    const draggedTaskElement = document.querySelector(
+      `[data-id='${draggedTaskId}']`
+    );
+    const allTasks = Array.from(taskList.children);
+    const currentTaskIndex = allTasks.indexOf(li);
+    const draggedTaskIndex = allTasks.indexOf(draggedTaskElement);
+
+    if (currentTaskIndex !== draggedTaskIndex) {
+      if (currentTaskIndex < draggedTaskIndex) {
+        taskList.insertBefore(draggedTaskElement, li);
+      } else {
+        taskList.insertBefore(draggedTaskElement, li.nextSibling);
+      }
+
+      // Mettre à jour l'ordre des tâches côté serveur (si nécessaire)
+      updateTaskOrder();
+    }
+  });
+
   return li;
 }
-//------------------------------------
-// Attache un écouteur d'événement sur le bouton "Ajouter"
+const updateTaskOrder = async () => {
+  const taskIds = Array.from(taskList.children).map((taskElement) =>
+    taskElement.getAttribute("data-id")
+  );
+
+  // Mettre à jour l'ordre des tâches sur le serveur
+  await fetch("/tasks/order", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ order: taskIds }),
+  });
+};
+// Attache d'un écouteur d'événement sur le bouton "Ajouter"
 document.getElementById("addTaskBtn").addEventListener("click", () => {
   const taskInput = document.getElementById("taskInput");
 
@@ -113,7 +174,7 @@ document.getElementById("addTaskBtn").addEventListener("click", () => {
   }
 });
 
-// Fonction appelée au chargement pour récupérer les tâches existantes
+// Appel de la fonction au chargement pour récupérer les tâches existantes
 const fetchTasks = async () => {
   const response = await fetch("/tasks");
   const tasks = await response.json();
@@ -125,7 +186,7 @@ const fetchTasks = async () => {
   }
 };
 
-// Appelle la fonction pour charger les tâches dès le début
+// Appel de la fonction pour charger les tâches dès le début
 fetchTasks();
 
 // Fonction de filtrage des tâches
@@ -153,7 +214,7 @@ const filterTasks = (status, button) => {
   }
 };
 
-// Ajoute les boutons de filtrage
+// Ajout des boutons de filtrage
 document
   .getElementById("filterAll")
   .addEventListener("click", (event) => filterTasks("all", event.target));
@@ -183,14 +244,14 @@ toggleBtn.addEventListener("click", () => {
 });
 
 updateTheme();
-//---------------------------------------------------
+
 // Fonction de tri par date de création (plus récent en premier)
 const sortByDate = () => {
   const allTasks = document.querySelectorAll("#taskList li");
   const sortedTasks = [...allTasks].sort((a, b) => {
     const dateA = new Date(a.getAttribute("data-id"));
     const dateB = new Date(b.getAttribute("data-id"));
-    return dateB - dateA; // Plus récent en premier
+    return dateB - dateA;
   });
   renderTasks(sortedTasks);
 };
@@ -201,7 +262,7 @@ const sortByAlpha = () => {
   const sortedTasks = [...allTasks].sort((a, b) => {
     const nameA = a.querySelector("span + span").textContent.toLowerCase();
     const nameB = b.querySelector("span + span").textContent.toLowerCase();
-    return nameA.localeCompare(nameB); // Trie par ordre alphabétique
+    return nameA.localeCompare(nameB);
   });
   renderTasks(sortedTasks);
 };
@@ -212,17 +273,17 @@ const sortByStatus = () => {
   const sortedTasks = [...allTasks].sort((a, b) => {
     const statusA = a.querySelector("span").textContent === "✓" ? 1 : 0;
     const statusB = b.querySelector("span").textContent === "✓" ? 1 : 0;
-    return statusB - statusA; // Tri par statut (terminées en premier)
+    return statusB - statusA;
   });
   renderTasks(sortedTasks);
 };
 
 // Fonction pour réafficher les tâches triées
 const renderTasks = (tasks) => {
-  taskList.innerHTML = ""; // Vide la liste actuelle
-  tasks.forEach((task) => {
-    taskList.appendChild(task); // Ajoute les tâches triées
-  });
+  taskList.innerHTML = "";
+  for (const task of tasks) {
+    taskList.appendChild(task);
+  }
 };
 
 // Ajoute l'événement de changement de la liste déroulante
