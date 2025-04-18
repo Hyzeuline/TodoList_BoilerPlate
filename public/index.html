@@ -8,10 +8,15 @@
   </head>
   <body>
     <div id="app">
-      <h1>Ma To-Do List</h1>
-      <button id="filterAll" class="selected filterButton">Toutes</button>
-      <button id="filterIncomplete" class="filterButton">En cours</button>
-      <button id="filterCompleted" class="filterButton">Terminées</button>
+      <div id="top">
+        <h1>Ma To-Do List</h1>
+        <button id="darkToggle">🌙</button>
+      </div>
+      <div id="filterContainer">
+        <button id="filterAll" class="selected filterButton">Toutes</button>
+        <button id="filterIncomplete" class="filterButton">En cours</button>
+        <button id="filterCompleted" class="filterButton">Terminées</button>
+      </div>
       <div id="sorting">
         <label for="taskSort">Trier les tâches :</label>
         <select id="taskSort">
@@ -20,9 +25,10 @@
           <option value="status">✔️ Par statut (terminées/en cours)</option>
         </select>
       </div>
-      <input type="text" id="taskInput" placeholder="Nouvelle tâche" />
-      <button id="addTaskBtn">Ajouter</button>
-      <button id="darkToggle">🌙</button>
+      <div id="newTask">
+        <input type="text" id="taskInput" placeholder="Nouvelle tâche" />
+        <button id="addTaskBtn">Ajouter</button>
+      </div>
       <ul id="taskList"></ul>
     </div>
     <script src="script.js"></script>

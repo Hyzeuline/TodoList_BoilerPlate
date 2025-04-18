@@ -1,13 +1,13 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 @import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap");
 body {
   --text-color: black;
   --bg-color: rgb(246, 229, 208);
-  --grid-color: rgb(214, 193, 167);
+  --grid-color: rgb(227, 209, 187);
   --bg-2-color: white;
   --bg-selected-color: aquamarine;
 
   font-family: "Patrick Hand", cursive;
+  font-size: 1rem;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
@@ -26,22 +26,95 @@ body.dark {
   --text-color: white;
   --bg-color: #121212;
   --bg-2-color: rgb(71, 70, 61);
-  --grid-color: rgb(55, 52, 49);
-  --bg-selected-color: rgb(33, 244, 65);
+  --grid-color: rgb(141, 141, 141);
+  --bg-selected-color: rgb(69, 178, 86);
+}
+
+h1 {
+  text-align: center;
+  font-size: 3.5rem;
+}
+
+#top {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+}
+
+#darkToggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+body.dark #darkToggle {
+  background-color: white;
+  color: black;
+}
+
+button {
+  font-family: "Patrick Hand", cursive;
+  margin: 5px;
+  border-radius: 0.5rem;
+  border: 1px solid var(--text-color);
 }
 
 .selected.filterButton {
   background-color: var(--bg-selected-color);
 }
 
-#taskSort {
-  font-family: "Patrick Hand", cursive;
+#filterContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
 }
+
+.filterButton {
+  padding: 8px 12px;
+  background-color: var(--bg-2-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  cursor: pointer;
+}
+
+#sorting {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+#newTask {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
 #taskInput {
   font-family: "Patrick Hand", cursive;
   padding: 8px;
   width: 70%;
   border: 2px solid var(--text-color);
+  border-radius: 1.5rem;
   color: var(--text-color);
   background-color: var(--bg-2-color);
 }
@@ -56,14 +129,14 @@ ul {
 }
 
 li {
-  padding: 8px;
+  padding: 12px;
   background-color: var(--bg-2-color);
   margin: 8px;
+  border-radius: 1rem;
 }
 
-button {
-  font-family: "Patrick Hand", cursive;
-  margin: 5px;
+li:hover {
+  background-color: var(--bg-selected-color);
 }
 
 .edit-input {
